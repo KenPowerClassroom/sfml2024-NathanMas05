@@ -2,11 +2,15 @@
 #include <time.h>
 using namespace sf;
 
-// Changed variable names for clarity
-int gridWidth = 30, gridHeight = 20;
-int tileSize = 16;
-int windowWidth = tileSize * gridWidth;
-int windowHeight = tileSize * gridHeight;
+// Replaced magic numbers with named constants
+const int GRID_WIDTH = 30;
+const int GRID_HEIGHT = 20;
+const int TILE_SIZE = 16;
+
+const float DELAY = 0.1f;
+
+int windowWidth = TILE_SIZE * GRID_WIDTH;
+int windowHeight = TILE_SIZE * GRID_HEIGHT;
 
 int direction, snakeLength = 4;
 
@@ -36,14 +40,14 @@ void Tick()
     if ((snake[0].x == fruit.x) && (snake[0].y == fruit.y))
     {
         snakeLength++;
-        fruit.x = rand() % gridWidth;
-        fruit.y = rand() % gridHeight;
+        fruit.x = rand() % GRID_WIDTH;
+        fruit.y = rand() % GRID_HEIGHT;
     }
 
-    if (snake[0].x > gridWidth) snake[0].x = 0;
-    if (snake[0].x < 0) snake[0].x = gridWidth;
-    if (snake[0].y > gridHeight) snake[0].y = 0;
-    if (snake[0].y < 0) snake[0].y = gridHeight;
+    if (snake[0].x > GRID_WIDTH) snake[0].x = 0;
+    if (snake[0].x < 0) snake[0].x = GRID_WIDTH;
+    if (snake[0].y > GRID_HEIGHT) snake[0].y = 0;
+    if (snake[0].y < 0) snake[0].y = GRID_HEIGHT;
 
     for (int i = 1; i < snakeLength; i++)
         if (snake[0].x == snake[i].x && snake[0].y == snake[i].y)
@@ -64,7 +68,7 @@ int snakeGame()
     Sprite sprite2(t2);
 
     Clock clock;
-    float timer = 0, delay = 0.1;
+    float timer = 0;
 
     fruit.x = 10;
     fruit.y = 10;
@@ -87,7 +91,7 @@ int snakeGame()
         if (Keyboard::isKeyPressed(Keyboard::Up)) direction = 3;
         if (Keyboard::isKeyPressed(Keyboard::Down)) direction = 0;
 
-        if (timer > delay)
+        if (timer > DELAY)
         {
             timer = 0;
             Tick();
@@ -96,20 +100,20 @@ int snakeGame()
         ////// draw  ///////
         window.clear();
 
-        for (int i = 0; i < gridWidth; i++)
-            for (int j = 0; j < gridHeight; j++)
+        for (int i = 0; i < GRID_WIDTH; i++)
+            for (int j = 0; j < GRID_HEIGHT; j++)
             {
-                sprite1.setPosition(i * tileSize, j * tileSize);
+                sprite1.setPosition(i * TILE_SIZE, j * TILE_SIZE);
                 window.draw(sprite1);
             }
 
         for (int i = 0; i < snakeLength; i++)
         {
-            sprite2.setPosition(snake[i].x * tileSize, snake[i].y * tileSize);
+            sprite2.setPosition(snake[i].x * TILE_SIZE, snake[i].y * TILE_SIZE);
             window.draw(sprite2);
         }
 
-        sprite2.setPosition(fruit.x * tileSize, fruit.y * tileSize);
+        sprite2.setPosition(fruit.x * TILE_SIZE, fruit.y * TILE_SIZE);
         window.draw(sprite2);
 
         window.display();
