@@ -87,6 +87,30 @@ void Tick(Snake& snake, Fruit& fruit) {
     }
 }
 
+// Draw the grid
+void drawGrid(RenderWindow& window, Sprite& sprite) {
+    for (int i = 0; i < GRID_WIDTH; i++) {
+        for (int j = 0; j < GRID_HEIGHT; j++) {
+            sprite.setPosition(i * TILE_SIZE, j * TILE_SIZE);
+            window.draw(sprite);
+        }
+    }
+}
+
+// Draw the snake
+void drawSnake(RenderWindow& window, Snake& snake, Sprite& sprite) {
+    for (int i = 0; i < snake.length; i++) {
+        sprite.setPosition(snake.segments[i].x * TILE_SIZE, snake.segments[i].y * TILE_SIZE);
+        window.draw(sprite);
+    }
+}
+
+// Draw the fruit
+void drawFruit(RenderWindow& window, Fruit& fruit, Sprite& sprite) {
+    sprite.setPosition(fruit.x * TILE_SIZE, fruit.y * TILE_SIZE);
+    window.draw(sprite);
+}
+
 int snakeGame() {
     srand(time(0));
 
@@ -129,19 +153,9 @@ int snakeGame() {
         ////// draw  ///////
         window.clear();
 
-        for (int i = 0; i < GRID_WIDTH; i++)
-            for (int j = 0; j < GRID_HEIGHT; j++) {
-                sprite1.setPosition(i * TILE_SIZE, j * TILE_SIZE);
-                window.draw(sprite1);
-            }
-
-        for (int i = 0; i < snake.length; i++) {
-            sprite2.setPosition(snake.segments[i].x * TILE_SIZE, snake.segments[i].y * TILE_SIZE);
-            window.draw(sprite2);
-        }
-
-        sprite2.setPosition(fruit.x * TILE_SIZE, fruit.y * TILE_SIZE);
-        window.draw(sprite2);
+        drawGrid(window, sprite1);
+        drawSnake(window, snake, sprite2);
+        drawFruit(window, fruit, sprite2);
 
         window.display();
     }
