@@ -7,6 +7,7 @@ const int GRID_WIDTH = 30;
 const int GRID_HEIGHT = 20;
 const int TILE_SIZE = 16;
 const float DELAY = 0.1f;
+const int INITIAL_SNAKE_LENGTH = 4; // New constant for initial snake length
 
 int windowWidth = TILE_SIZE * GRID_WIDTH;
 int windowHeight = TILE_SIZE * GRID_HEIGHT;
@@ -36,7 +37,7 @@ public:
     int direction;
 
     Snake() {
-        length = 4;
+        length = INITIAL_SNAKE_LENGTH;
         direction = 0;
         for (int i = 0; i < length; ++i) {
             segments[i].x = GRID_WIDTH / 2;
@@ -82,12 +83,13 @@ void Tick(Snake& snake, Fruit& fruit) {
         fruit.respawn();
     }
 
+    // Early return to simplify the game-over logic
     if (snake.checkCollision()) {
-        snake.length = 4;  // Reset the snake length on collision
+        snake.length = INITIAL_SNAKE_LENGTH;  // Use descriptive constant for reset
+        return;
     }
 }
 
-// Draw the grid
 void drawGrid(RenderWindow& window, Sprite& sprite) {
     for (int i = 0; i < GRID_WIDTH; i++) {
         for (int j = 0; j < GRID_HEIGHT; j++) {
@@ -97,7 +99,6 @@ void drawGrid(RenderWindow& window, Sprite& sprite) {
     }
 }
 
-// Draw the snake
 void drawSnake(RenderWindow& window, Snake& snake, Sprite& sprite) {
     for (int i = 0; i < snake.length; i++) {
         sprite.setPosition(snake.segments[i].x * TILE_SIZE, snake.segments[i].y * TILE_SIZE);
@@ -105,7 +106,6 @@ void drawSnake(RenderWindow& window, Snake& snake, Sprite& sprite) {
     }
 }
 
-// Draw the fruit
 void drawFruit(RenderWindow& window, Fruit& fruit, Sprite& sprite) {
     sprite.setPosition(fruit.x * TILE_SIZE, fruit.y * TILE_SIZE);
     window.draw(sprite);
