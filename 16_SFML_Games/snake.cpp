@@ -14,6 +14,12 @@ int windowHeight = TILE_SIZE * GRID_HEIGHT;
 
 int direction, snakeLength = 4;
 
+// Renamed the dummy function to avoid confusion
+int dummySnake()
+{
+    return 0;
+}
+
 struct Snake
 {
     int x, y;

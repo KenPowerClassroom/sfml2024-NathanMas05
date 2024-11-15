@@ -17,12 +17,13 @@
 #pragma comment(lib,"winmm.lib")
 #pragma comment(lib,"freetype.lib")
 
-#include<iostream>
+#include <iostream>
 
+// Forward declarations
 int tetris();
 int doodle_jump();
 int arkanoid();
-int snake();
+int snakeGame(); // Update the function to call snakeGame() instead of snake
 int minesweeper();
 int fifteen_puzzle();
 int racing();
@@ -33,11 +34,11 @@ int netwalk();
 int mahjong();
 int tron();
 int chess();
-int volleyball() {/* TODO add box2D*/ return 0; }
+int volleyball() { /* TODO add box2D*/ return 0; }
 int asteroids();
 
-
 using namespace std;
+
 int main()
 {
     char key;
@@ -45,7 +46,7 @@ int main()
         cout << "Choose a game. Enter the uppercase key in game name :\n";
         cout << "============================================\n";
         cout << "Tetris \n";
-        cout << "Doodle jump\n";  
+        cout << "Doodle jump\n";
         cout << "Arkanoid\n";
         cout << "Snake\n";
         cout << "Minesweeper\n";
@@ -61,78 +62,73 @@ int main()
         cout << "Volleyball\n";
         cout << "astEroids\n";
 
-
-
         cin >> key;
 
         switch (key) {
-            case 'T':
-            case 't':
-                tetris();
-                break;
-            case 'D':
-            case 'd':
-                doodle_jump();
-                break;
-            case 'A':
-            case 'a':
-                arkanoid();
-                break;
-            case 'S':
-            case 's':
-                snake();
-                break;
-            case 'M':
-            case 'm':
-                minesweeper();
-                break;
-            case 'F':
-            case 'f':
-                fifteen_puzzle();
-                break; 
-            case 'r':
-            case 'R':
-                racing();
-                break;
-            case 'O':
-            case 'o':
-                outrun();
-                break;
-            case 'X':
-            case 'x':
-                xonix();
-                break;    
-            case 'b':
-            case 'B':
-                bejeweled();
-                break;
-            case 'n':
-            case 'N':
-                netwalk();
-                break;
-            case 'J':
-            case 'j':
-                mahjong();
-                break;
-            case 'u':
-            case 'U':
-                tron();
-                break;
-            case 'c':
-            case 'C':
-                chess();
-                break;
-            case 'v':
-            case 'V':
-                volleyball();
-                break;
-            case 'e':
-            case 'E':
-                asteroids();
-                break;
+        case 'T':
+        case 't':
+            tetris();
+            break;
+        case 'D':
+        case 'd':
+            doodle_jump();
+            break;
+        case 'A':
+        case 'a':
+            arkanoid();
+            break;
+        case 'S':
+        case 's':
+            snakeGame(); // Updated to call snakeGame() instead of snake()
+            break;
+        case 'M':
+        case 'm':
+            minesweeper();
+            break;
+        case 'F':
+        case 'f':
+            fifteen_puzzle();
+            break;
+        case 'r':
+        case 'R':
+            racing();
+            break;
+        case 'O':
+        case 'o':
+            outrun();
+            break;
+        case 'X':
+        case 'x':
+            xonix();
+            break;
+        case 'b':
+        case 'B':
+            bejeweled();
+            break;
+        case 'n':
+        case 'N':
+            netwalk();
+            break;
+        case 'J':
+        case 'j':
+            mahjong();
+            break;
+        case 'u':
+        case 'U':
+            tron();
+            break;
+        case 'c':
+        case 'C':
+            chess();
+            break;
+        case 'v':
+        case 'V':
+            volleyball();
+            break;
+        case 'e':
+        case 'E':
+            asteroids();
+            break;
         }
-
     }
-
 }
-
