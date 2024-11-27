@@ -1,5 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include <time.h>
+#include "pch.h"
+
+
 using namespace sf;
 
 // Replaced magic numbers with named constants
